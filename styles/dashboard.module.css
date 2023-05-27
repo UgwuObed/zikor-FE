@@ -1,16 +1,67 @@
 .dashboard-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-  }
-  
-  .logo-container {
-    flex: 0 0 auto;
-    margin-right: 1rem;
-  }
-  
-  .user-container {
-    flex: 0 0 auto;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.logo-container {
+  position: relative;
+  margin-left: 150px;
+  z-index: 1;
+  top: 35px;
+}
+
+.user-container {
+
+  margin-left: 1rem;
+  margin-bottom: 35rem;
+}
+
+.left-side {
+  background-color: #EEEEEE;
+  height: 39.90rem;
+  width: 24rem;
+  margin-top: -25px;
+  margin-left: -100px;
+}
+
+.right-side {
+  position: relative;
+}
+
+.icons-container ul {
+  position: absolute;
+  top: 5rem;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 23px;
+}
+
+.icons-container ul li {
+  margin-bottom: 3rem;
+}
+
+.icons-container ul li:nth-last-child(-n+3) {
+  margin-bottom: 12rem;
+  /* Add more space between the last two and the rest of the items */
+}
+
+.icons-container ul li:nth-last-child(-n+2) {
+  margin-bottom: 2rem;
+  /* Add more space between the last two items */
+}
+
+.icons-container ul li a {
+  text-decoration: none;
+  color: #000000;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icons-container ul li a:hover {
+  text-decoration: none;
+  color: #5E17EB;
+  transform: scale(1.1);
+}
