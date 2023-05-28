@@ -1,7 +1,6 @@
 import React from 'react';
 import dashboardStyles from '../styles/dashboard.module.css';
 import Image from 'next/image';
-import globalStyles from '../styles/styles.css';
 
 const DashboardPage = () => {
   return (
@@ -22,14 +21,36 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
-      <div className={dashboardStyles['right-side']}>
-        <div className={dashboardStyles['user-container']}>
-          <span>Welcome</span>
+      <div className={dashboardStyles['center']}>
+        <ul className={dashboardStyles['list-items']}>
+          <li className={dashboardStyles['active']}><a href="#">Dashboard</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Order</a></li>
+          <li><a href="#">Completed</a></li>
+        </ul>
+      </div>
+      <div className={dashboardStyles['boxes-container']}>
+        <div className={dashboardStyles['box']}>
+          <h2>Box 1</h2>
+          <p>Description 1</p>
+        </div>
+        <div className={dashboardStyles['box']}>
+          <h2>Box 2</h2>
+          <p>Description 2</p>
+        </div>
+        <div className={dashboardStyles['box']}>
+          <h2>Box 3</h2>
+          <p>Description 3</p>
+        </div>
+        <div className={dashboardStyles['box']}>
+          <h2>Box 4</h2>
+          <p>Description 4</p>
         </div>
       </div>
-      {/* Add the rest of your dashboard content here */}
+      {/* Rest of your code */}
     </div>
   );
 };
 
 export default DashboardPage;
+
