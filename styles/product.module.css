@@ -1,0 +1,122 @@
+.product-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  
+  .logo-container {
+    position: relative;
+    margin-left: 150px;
+    z-index: 1;
+    top: 35px;
+  }
+  
+  .user-container {
+  
+    margin-left: 1rem;
+    margin-bottom: 35rem;
+  }
+  
+  .left-side {
+    background-color: #EEEEEE;
+    height: 40.90rem;
+    width: 21rem;
+    margin-top: -25px;
+    margin-left: -100px;
+  }
+  
+  .right-side {
+    position: relative;
+    color: #000000;
+  }
+  
+  .icons-container ul {
+    position: absolute;
+    top: 5rem;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .icons-container ul li {
+    margin-bottom: 4rem;
+  }
+  
+  .nav-text {
+    display: block;
+    margin-top: -27px;
+    margin-left: 27px;
+  }
+  
+  
+  .icons-container ul li:nth-last-child(-n+3) {
+    margin-bottom: 15rem;
+  }
+  
+  .icons-container ul li:nth-last-child(-n+2) {
+    margin-bottom: 2rem;
+  }
+  
+  .icons-container ul li a {
+    text-decoration: none;
+    color: #000000;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .icons-container ul li a:hover {
+    text-decoration: none;
+    color: #5E17EB;
+    transform: scale(1.1);
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    color: #000000;
+    margin-top: -433px;
+    margin-left: 39px;
+    
+  }
+  
+  .list-items {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .list-items li {
+    margin-right: 7rem; 
+  }
+  
+  .list-items a{
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 1000;
+  }
+  
+  .list-items li.active {
+    border: none;
+    background-color: #ffffff;
+    padding: 15px 32px;
+    text-align: center;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5%;
+  
+  }
+  
+  .list-items li.active:hover {
+    background-color: #5E17EB;
+    color: #FFFFFF;
+  
+  }
+  
+  .list-items li.active:hover a {
+    color: #FFFFFF;
+  }
+  
