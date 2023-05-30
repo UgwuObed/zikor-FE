@@ -34,8 +34,46 @@ const DashboardPage = () => {
           <li><a href="#">Completed</a></li>
         </ul>
       </div>
-     
-      
+
+      <div className={dashboardStyles['search-bar']}>
+  <input type="text" placeholder="Search products by name" />
+  <button type="button">Search</button>
+</div>
+<div className={dashboardStyles['button-add']}>
+<button className={dashboardStyles['add-button']} style={{float: "left"}}>Add</button>
+</div>
+<div className={dashboardStyles['table-container']}>
+  <h2 className={dashboardStyles['table-title']}>Products</h2>
+  <table className={dashboardStyles['product-table']}>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Category</th>
+        <td className={dashboardStyles['last-body']}>More</td>
+      </tr>
+    </thead>
+    <tbody>
+      {/* Dummy table content */}
+      <tr>
+        <td>Product 1</td>
+        <td>Type 1</td>
+        <td>$10</td>
+        <td>Category 1</td>
+        <td className={dashboardStyles['last-body']}>More 1</td>
+      </tr>
+      <tr>
+        <td>Product 2</td>
+        <td>Type 2</td>
+        <td>$20</td>
+        <td>Category 2</td>
+        <td className={dashboardStyles['last-body']}>More 2</td>
+      </tr>
+      {/* ... */}
+    </tbody>
+  </table>
+</div>
 
     </div>
   );
