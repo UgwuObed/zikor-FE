@@ -37,54 +37,55 @@ const DashboardPage = () => {
   const renderForm = () => {
     if (selectedCategory === 'cloths') {
       return (
-        <div className={dashboardStyles['form-wrapper']}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" value={formValues.name || ''} onChange={handleInputChange} />
+                <div className={dashboardStyles['form-wrapper']}>
+          <div className={dashboardStyles['form-field']}>
+            <label htmlFor="name">Name *</label>
+            <input type="text" id="name" value={formValues.name || ''} onChange={handleInputChange} className={dashboardStyles.inputName} />
           </div>
-          <div>
-            <label htmlFor="type">Type:</label>
-            <input type="text" id="type" value={formValues.type || ''} onChange={handleInputChange} />
+          <div className={dashboardStyles['form-field1']}>
+            <label htmlFor="type">Type *</label>
+            <input type="text" id="type" value={formValues.type || ''} onChange={handleInputChange} className={dashboardStyles.inputType} />
           </div>
-          <div>
-            <label htmlFor="brand">Brand:</label>
-            <input type="text" id="brand" value={formValues.brand || ''} onChange={handleInputChange} />
+          <div className={dashboardStyles['form-field2']}>
+            <label htmlFor="brand">Brand *</label>
+            <input type="text" id="brand" value={formValues.brand || ''} onChange={handleInputChange} className={dashboardStyles.inputBrand} />
           </div>
-          <div>
-            <label htmlFor="size">Size:</label>
-            <input type="text" id="size" value={formValues.brand || ''} onChange={handleInputChange} />
+          <div className={dashboardStyles['form-field3']}>
+            <label htmlFor="size">Size *</label>
+            <input type="text" id="size" value={formValues.size || ''} onChange={handleInputChange} className={dashboardStyles.inputSize} />
           </div>
-          <div>
-            <label htmlFor="category">Gender:</label>
-            <select id="category" value={formValues.category || ''} onChange={handleInputChange}>
+          <div className={dashboardStyles['form-field4']}>
+            <label htmlFor="category">Gender *</label>
+            <select id="category" value={formValues.category || ''} onChange={handleInputChange} className={dashboardStyles.selectCategory}>
               <option value="">Select a gender category</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Unisex">Unisex</option>
             </select>
           </div>
-          <div>
-            <label htmlFor="description">Description:</label>
-            <textarea id="description" value={formValues.description || ''} onChange={handleInputChange}></textarea>
+          <div className={dashboardStyles['form-field5']}>
+            <label htmlFor="description">Description *</label>
+            <textarea id="description" value={formValues.description || ''} onChange={handleInputChange} className={dashboardStyles.textareaDescription}></textarea>
           </div>
-          <div>
+          <div className={dashboardStyles['form-field6']}>
             <label htmlFor="color">Color:</label>
-            <input type="text" id="color" value={formValues.color || ''} onChange={handleInputChange} />
+            <input type="text" id="color" value={formValues.color || ''} onChange={handleInputChange} className={dashboardStyles.inputColor} />
           </div>
-          <div>
+          <div className={dashboardStyles['form-field7']}>
             <label htmlFor="price">Price:</label>
-            <input type="text" id="price" value={formValues.price || ''} onChange={handleInputChange} />
+            <input type="text" id="price" value={formValues.price || ''} onChange={handleInputChange} className={dashboardStyles.inputPrice} />
           </div>
-          <div>
+          <div className={dashboardStyles['form-field8']}>
             <label htmlFor="image">Image:</label>
-            <input type="file" id="image" accept="image/*" />
+            <input type="file" id="image" accept="image/*" className={dashboardStyles.inputImage} />
           </div>
           <div>
-            <button type="button" onClick={handleUpload}>
+            <button type="button" onClick={handleUpload} className={dashboardStyles.uploadButton}>
               Upload
             </button>
           </div>
         </div>
+
       );
     } else if (selectedCategory === 'food') {
       return (

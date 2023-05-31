@@ -172,11 +172,12 @@
   margin-left: 290px;
 }
 
-.table-container{
+.table-container {
   margin-top: 190px;
 }
+
 .table-title {
-  
+
   margin-left: -1000px;
 }
 
@@ -210,7 +211,7 @@
 
 .last-head {
   font-size: 12px;
-  }
+}
 
 .last-body {
   font-size: 12px;
@@ -252,7 +253,7 @@
   margin-left: 18px;
 }
 
-.add-product-section{
+.add-product-section {
   position: absolute;
   background-color: #ffffff;
   margin-top: 80px;
@@ -262,9 +263,9 @@
   border-radius: 5px;
 }
 
-.add-product-section h2{
-   font-size: 15px;
-   margin-left: 18px;
+.add-product-section h2 {
+  font-size: 15px;
+  margin-left: 18px;
 }
 
 .category-container {
@@ -309,4 +310,156 @@
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.form-field {
+  font-size: 20px;
+}
+
+.form-field1 {
+  font-size: 20px;
+  margin-left: 420px;
+  margin-top: -39px;
+}
+
+.form-field2 {
+  font-size: 20px;
+  margin-top: 39px;
+}
+
+.form-field3 {
+  font-size: 20px;
+  margin-left: 420px;
+  margin-top: -39px;
+}
+
+.form-field4 {
+  font-size: 20px;
+  margin-top: 39px;
+  margin-left: 420px;
+}
+
+.form-field5 {
+  font-size: 20px;
+  margin-top: -39px;
+}
+
+.inputName {
+  border: 1px solid #006197;
+  border-radius: 5px;
+  height: 35px;
+  width: 300px;
+}
+
+.inputType {
+  position: absolute;
+  border: 1px solid #006197;
+  border-radius: 5px;
+  height: 35px;
+  width: 300px;
+  
+}
+
+.inputBrand {
+  border: 1px solid #006197;
+  border-radius: 5px;
+  height: 35px;
+  width: 300px;
+}
+
+.inputSize{
+  border: 1px solid #006197;
+  border-radius: 5px;
+  height: 35px;
+  width: 300px;
+}
+
+.selectCategory{
+  appearance: none;
+  background-color: #ffffff;
+  border: 1px solid #5E17EB;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 15px;
+  width: 20%;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-left: 13px;
+}
+
+.textareaDescription{
+  border: 1px solid #006197;
+  border-radius: 5px;
+  height: 35px;
+  width: 243px;
+  padding-top: 50px;
+}
+
+.uploadButton {
+  background-color: #5E17EB;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.uploadButton:hover {
+  background-color: #7066ff;
+}
+
+.uploadButton:active {
+  background-color: #5E17EB;
+}
+
+.form-field8 {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-field8 label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+
+.drop-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+  cursor: pointer;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover {
+  background: #eee;
+  border-color: #111;
+}
+
+.drop-container:hover .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+}
+
+
+
+
 
