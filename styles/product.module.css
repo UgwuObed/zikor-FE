@@ -184,7 +184,7 @@
   position: absolute;
   width: 73%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: 0rem;
   background-color: #ffffff;
   margin-left: -1000px;
   border: #FFFFFF;
@@ -201,7 +201,7 @@
 .product-table td {
   padding: 1.7rem;
   text-align: left;
-  
+  border-bottom: 1px solid #000000;
 }
 
 .product-table th {
@@ -209,10 +209,104 @@
 }
 
 .last-head {
-  font-size: 1px;
-  border-bottom: #000000;
-}
+  font-size: 12px;
+  }
 
 .last-body {
   font-size: 12px;
 }
+
+.more-options {
+  background-color: white;
+  width: 60px;
+  height: 70px;
+  box-shadow: 0 4px 8px rgba(0, 2, 1, 0.4);
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.more-options ul {
+  list-style: none;
+  padding: 0;
+}
+
+.more-options li {
+  margin-bottom: 8px;
+  padding-top: 12px;
+}
+
+.more-options a {
+  text-decoration: none;
+}
+
+.more-options a.delete {
+  color: #FF0000;
+  font-weight: 800;
+  margin-left: 10px;
+}
+
+.more-options a.edit {
+  color: #B9A600;
+  font-weight: 800;
+  margin-left: 18px;
+}
+
+.add-product-section{
+  position: absolute;
+  background-color: #ffffff;
+  margin-top: 80px;
+  margin-left: 360px;
+  height: 140px;
+  font-size: 10px;
+  border-radius: 5px;
+}
+
+.add-product-section h2{
+   font-size: 15px;
+   margin-left: 18px;
+}
+
+.category-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.category-container label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 24px;
+  margin-left: 35px;
+}
+
+.category-container select {
+  appearance: none;
+  background-color: #ffffff;
+  border: 1px solid #5E17EB;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 15px;
+  width: 80%;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-left: 13px;
+}
+
+.category-container select:focus {
+  outline: none;
+  border-color: #5E17EB;
+  box-shadow: 0 0 0 2px rgba(120, 49, 252, 0.2);
+}
+
+.form-wrapper {
+  background-color: #fff;
+  position: absolute;
+  top: -250px;
+  right: -640px;
+  width: 800px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
