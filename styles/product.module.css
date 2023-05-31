@@ -402,7 +402,7 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  margin-left: 40px;
+  margin-left: 706px;
   transition: background-color 0.3s ease;
 }
 
@@ -415,7 +415,6 @@
 }
 
 .form-field8 {
-  position: relative;
   margin-bottom: 20px;
 }
 
@@ -426,40 +425,103 @@
 }
 
 
-.drop-container {
+.dropContainer {
   position: relative;
   display: flex;
   gap: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 60px;
+  width: 200px;
   padding: 20px;
+  margin-left: 550px;
+  margin-top: -170px;
   border-radius: 10px;
-  border: 2px dashed #555;
-  color: #444;
+  border: 2px dashed #5E17EB;
+  color: #5E17EB;
   cursor: pointer;
   transition: background .2s ease-in-out, border .2s ease-in-out;
 }
 
-.drop-container:hover {
+.dropContainer:hover {
   background: #eee;
   border-color: #111;
 }
 
-.drop-container:hover .drop-title {
-  color: #222;
+.dropContainer:hover .drop-title {
+  color: #5E17EB;
 }
 
-.drop-title {
-  color: #444;
-  font-size: 20px;
+.dropTitle {
+  color: #5E17EB;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
   transition: color .2s ease-in-out;
 }
 
+.inputImage {
+  width: 150px;
+  font-size: 12px;
+  max-width: 100%;
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #555;
+}
 
+.inputImage:hover {
+  background: #eee;
+}
+
+.inputImage:focus {
+  outline: none;
+  border-color: #084cdf;
+  box-shadow: 0 0 0 3px rgba(8, 76, 223, 0.3);
+}
+
+.form-field6 {
+  font-size: 20px;
+  margin-top: 39px;
+}
+
+.form-field7 {
+  font-size: 20px;
+  margin-top: 26px;
+}
+
+.inputPrice{
+  border: 1px solid #006197;
+  border-radius: 5px;
+  height: 35px;
+  width: 300px;
+}
+
+.inputColor{
+  border: 1px solid #006197;
+  border-radius: 5px;
+  height: 35px;
+  width: 300px;
+}
+
+.notification {
+  background-color: green;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.notification.show {
+  opacity: 1;
+}
 
 
 

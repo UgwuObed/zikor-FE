@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dashboardStyles from '../styles/product.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ const DashboardPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [formValues, setFormValues] = useState({});
   const [isProductAdded, setIsProductAdded] = useState(false);
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
 
   const handleMoreClick = (rowIndex) => {
     setSelectedRow(rowIndex === selectedRow ? null : rowIndex);
@@ -33,6 +34,21 @@ const DashboardPage = () => {
     // Reset form values
     setFormValues({});
   };
+
+  useEffect(() => {
+    if (isProductAdded) {
+      setIsNotificationVisible(true);
+
+      // Hide the notification after 3 seconds
+      const timer = setTimeout(() => {
+        setIsNotificationVisible(false);
+        setIsProductAdded(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isProductAdded]);
+  
 
   const renderForm = () => {
     if (selectedCategory === 'cloths') {
@@ -68,20 +84,24 @@ const DashboardPage = () => {
             <textarea id="description" value={formValues.description || ''} onChange={handleInputChange} className={dashboardStyles.textareaDescription}></textarea>
           </div>
           <div className={dashboardStyles['form-field6']}>
-            <label htmlFor="color">Color:</label>
+            <label htmlFor="color">Color *</label>
             <input type="text" id="color" value={formValues.color || ''} onChange={handleInputChange} className={dashboardStyles.inputColor} />
           </div>
           <div className={dashboardStyles['form-field7']}>
-            <label htmlFor="price">Price:</label>
+            <label htmlFor="price">Price *</label>
             <input type="text" id="price" value={formValues.price || ''} onChange={handleInputChange} className={dashboardStyles.inputPrice} />
           </div>
           <div className={dashboardStyles['form-field8']}>
-            <label htmlFor="image">Image:</label>
+          <label htmlFor="image" className={dashboardStyles.dropContainer}>
+            <span className={dashboardStyles.dropTitle}>Drop files here </span>
+            or
             <input type="file" id="image" accept="image/*" className={dashboardStyles.inputImage} />
-          </div>
+          </label>
+        </div>
+
           <div>
             <button type="button" onClick={handleUpload} className={dashboardStyles.uploadButton}>
-              Upload
+              Add
             </button>
           </div>
         </div>
@@ -192,7 +212,7 @@ const DashboardPage = () => {
             <label htmlFor="category">Category:</label>
             <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
               <option value="">Select a option</option>
-              <option value="cloths">Cloths</option>
+              <option value="cloths">Cloth</option>
               <option value="food">Food</option>
               <option value="shoes">Shoes</option>
             </select>
@@ -200,8 +220,8 @@ const DashboardPage = () => {
           {renderForm()}
         </div>
       )}
-      {isProductAdded && (
-        <div className={dashboardStyles['notification']}>
+      {isNotificationVisible && (
+        <div className={`${dashboardStyles['notification']} ${dashboardStyles['show']}`}>
           Product successfully added!
         </div>
       )}
