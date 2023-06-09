@@ -446,7 +446,7 @@
 
 .dropContainer:hover {
   background: #eee;
-  border-color: #111;
+  border-color: #5E17EB;
 }
 
 .dropContainer:hover .drop-title {
