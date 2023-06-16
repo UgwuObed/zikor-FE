@@ -9,6 +9,9 @@ const RegisterForm = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [city, setCity] = useState('');
   const [csrfToken, setCsrfToken] = useState('');
 
   const router = useRouter();
@@ -45,10 +48,13 @@ const RegisterForm = () => {
       phone,
       password,
       password_confirmation: passwordConfirmation,
+      state,
+      country,
+      city,
     };
 
     try {
-      const response = await fetch('http://localhost:8000/register.store', {
+      const response = await fetch('http://localhost:8000/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,6 +74,9 @@ const RegisterForm = () => {
         setPhone('');
         setPassword('');
         setPasswordConfirmation('');
+        setState('');
+        setCountry('');
+        setCity('');
       } else {
         // Handle error
         const errorData = await response.json();
@@ -127,6 +136,36 @@ const RegisterForm = () => {
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+      </label>
+            <br />
+      <label>
+        State:
+        <input
+          type="text"
+          value={state}
+          onChange={(e) => setState(e.target.value)}
+          required
+        />
+      </label>
+      <br />
+      <label>
+        Country:
+        <input
+          type="text"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          required
+        />
+      </label>
+      <br />
+      <label>
+        City:
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
           required
         />
       </label>
