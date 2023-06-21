@@ -19,7 +19,7 @@ const RegisterForm = () => {
   useEffect(() => {
     async function fetchCsrfToken() {
       try {
-        const response = await fetch('http://localhost:8000/csrf-cookie');
+        const response = await fetch('http://localhost:8000/csrf-token');
         if (response.ok) {
           setCsrfToken(response.headers.get('X-CSRF-TOKEN'));
         } else {
@@ -59,6 +59,7 @@ const RegisterForm = () => {
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-TOKEN': csrfToken,
+          'X-Requested-With': 'XMLHttpRequest',
         },
         body: JSON.stringify(formData),
       });
