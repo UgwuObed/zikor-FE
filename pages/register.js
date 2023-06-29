@@ -13,6 +13,7 @@ const RegisterForm = () => {
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
   const [csrfToken, setCsrfToken] = useState('');
+  const [error, setError] = useState('');
 
   const router = useRouter();
 
@@ -78,10 +79,12 @@ const RegisterForm = () => {
         setState('');
         setCountry('');
         setCity('');
+        // Redirect to the dashboard page
+        router.push('/dashboard');
       } else {
         // Handle error
         const errorData = await response.json();
-        console.log('Error:', errorData);
+        setError('Registration not successful. ' + errorData.message);
       }
     } catch (error) {
       // Handle fetch error
@@ -140,7 +143,7 @@ const RegisterForm = () => {
           required
         />
       </label>
-            <br />
+      <br />
       <label>
         State:
         <input
@@ -191,6 +194,7 @@ const RegisterForm = () => {
         />
       </label>
       <br />
+      {error && <p>Error: {error}</p>}
       <button type="submit">Register</button>
     </form>
   );
