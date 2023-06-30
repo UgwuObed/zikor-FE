@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/register.module.css';
 
 const RegisterForm = () => {
@@ -14,10 +16,9 @@ const RegisterForm = () => {
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
   const [csrfToken, setCsrfToken] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState([]);
   const [showLogo, setShowLogo] = useState(true);
   const [showStep2, setShowStep2] = useState(false);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -42,10 +43,15 @@ const RegisterForm = () => {
     setShowStep2(true);
   };
 
+  const handleGoBack = () => {
+    setShowStep2(false);
+    setErrors([]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== passwordConfirmation) {
-      console.log('Password and password confirmation do not match');
+      setErrors(['Password and password confirmation do not match']);
       return;
     }
 
@@ -96,7 +102,12 @@ const RegisterForm = () => {
       } else {
         // Handle error
         const errorData = await response.json();
-        setError('Registration not successful. ' + errorData.message);
+        if (errorData.errors) {
+          const errorMessages = Object.values(errorData.errors);
+          setErrors(errorMessages);
+        } else {
+          setErrors(['Registration not successful. ' + errorData.message]);
+        }
       }
     } catch (error) {
       // Handle fetch error
@@ -125,7 +136,7 @@ const RegisterForm = () => {
               <div className={styles.logoPicture}>
                 <img src="/zikor-logo.png" alt="Logo" />
               </div>
-              <p className={styles.signUp}>Sign Up</p>
+              <p className={styles.signUp}>Sign Up (Step 1)</p>
               <label className={styles.label}>
                 First Name:
                 <input
@@ -193,6 +204,12 @@ const RegisterForm = () => {
                 <img src="/zikor-logo.png" alt="Logo" />
               </div>
               <p className={styles.signUp}>Sign Up (Step 2)</p>
+              <div className={styles.backButtonContainer}>
+                <button type="button" onClick={handleGoBack} className={styles.backButton}>
+                  <FontAwesomeIcon icon={faArrowLeft} className={styles.backIcon} />
+                </button>
+              </div>
+
               <label className={styles.label}>
                 Country:
                 <input
@@ -248,10 +265,21 @@ const RegisterForm = () => {
                 />
               </label>
               <br />
-              {error && <p className={styles.errorMessage}>Error: {error}</p>}
-              <button type="submit" className={styles.submitButton}>
-                Register
-              </button>
+              {errors.length > 0 && (
+                <div className={styles.errorContainer}>
+                  {errors.map((error, index) => (
+                    <p key={index} className={styles.errorMessage}>
+                      {error}
+                    </p>
+                  ))}
+                </div>
+              )}
+              <div className={styles.buttonContainer}>
+
+                <button type="submit" className={styles.submitButton}>
+                  Register
+                </button>
+              </div>
             </form>
           )}
         </div>
