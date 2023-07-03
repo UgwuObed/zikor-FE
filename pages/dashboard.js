@@ -23,6 +23,11 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
+      <div className={dashboardStyles['profilePage']}>
+        <Link href="/profile" as="/profile">
+          <h4>Profile</h4>
+        </Link>
+      </div>
       <div className={dashboardStyles['center']}>
         <ul className={dashboardStyles['list-items']}>
           <li className={dashboardStyles['active']}><a href="#">Dashboard</a></li>
@@ -82,5 +87,4 @@ const DashboardPage = () => {
     </div>
   );
 };
-
 export default DashboardPage;

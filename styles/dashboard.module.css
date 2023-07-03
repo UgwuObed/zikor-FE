@@ -304,4 +304,11 @@
   color: #FFFFFF;
 }
 
+.profilePage h4{
+  position: absolute;
+  color: #000000;
+  text-decoration: none;
+  top: 28px;
+  right: 30px;
+}
 
