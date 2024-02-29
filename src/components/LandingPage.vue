@@ -9,6 +9,13 @@
       </div>
     </div>
 
+<div class="advantage-container">
+    <div class="advantage-item" :class="{ 'active': currentIndex === index }" v-for="(advantage, index) in visibleAdvantages" :key="index">
+            <p>{{ advantage }}</p>
+     
+    </div>
+  </div>
+
     <div class="content">
       <div class="centered-text">
         <h1>Start Selling with</h1>
