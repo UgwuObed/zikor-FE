@@ -1,7 +1,7 @@
 <template>
   <div class="landing-page">
     <div class="header">
-      <div class="logo">
+      <div class="zikor-logo">
         <img src="../assets/zikor-logo.png" alt="Logo">
       </div>
       <div class="hamburger-menu" v-if="isMobile">
@@ -17,8 +17,62 @@
           Zikor brings you a <span class="highlight-animation" :class="{ typing_out: isTypingOut, typing_in: isTypingIn }">cutting-edge</span> chat technology commerce platform, transforming the way you do business.
         </p>
       </div>
+    <div class="button-container">
+            <button class="button button1">Start Now</button>
+            <button class="button button2">About</button>
+        </div>
+    </div>
+     <div class="trusted-section">
+    <h2>Trusted by</h2>
+    <div class="logos-container">
+       <div class="logo"><img src="../assets/logo-1.png" alt="Logo 1"></div>
+        <div class="logo"><img src="../assets/logo-2.png" alt="Logo 2"></div>
+        <div class="logo"><img src="../assets/logo-3.png" alt="Logo 3"></div>
+        <div class="logo"><img src="../assets/logo-4.png" alt="Logo 4"></div>
+        <div class="logo"><img src="../assets/logo-5.png" alt="Logo 5"></div>
+        <div class="logo"><img src="../assets/logo-6.png" alt="Logo 6"></div>
     </div>
   </div>
+  <div class="big-image">
+  <img src="../assets/zikbig.png" alt="Additional Image">
+ </div>
+
+ <div class="why-choose-section">
+  <h2>Why Choose Zikor</h2>
+  
+  <div class="why-choose-grid">
+    <div class="why-choose-item">
+    <h3>Smart Selling, Simplified 🤖💬</h3>
+      <img src="../assets/why1.png" alt="Additional Image">
+        <ul>
+          <li>Engage effortlessly with potential buyers using our intuitive chatbot.</li>
+          <li>Showcase your products seamlessly with our hassle-free upload process.</li>
+        </ul>
+    </div>
+    
+<div class="why-choose-item">
+    <h3>Negotiate Like a Pro 🤝💰</h3>
+      <img src="../assets/why2.png" alt="Additional Image">
+        <ul>
+          <li>Personalize your negotiations with buyers and close deals like a seasoned pro.</li>
+          <li>Let our chatbot be your trusted partner in securing the best prices.</li>
+        </ul>
+    </div>
+
+<div class="why-choose-item">
+    <h3>Secure and Swift Transactions 💳✨</h3>
+      <img src="../assets/why3.png" alt="Additional Image">
+        <ul>
+          <li>Engage effortlessly with potential buyers using our intuitive chatbot.</li>
+          <li>Showcase your products seamlessly with our hassle-free upload process.</li>
+        </ul>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
 </template>
 
 <script>
@@ -113,11 +167,11 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
 }
 
-.logo img {
-    height: 50px;
+.zikor-logo img {
+    height: 40px;
     margin-top: 5px;
 }
 
@@ -144,12 +198,108 @@ export default {
 
 .typing_out,
 .typing_in {
-  /* Animation styles for appearance/disappearance */
+  
   animation: typing 0.8s ease-in-out forwards;
 }
 
+.button-container {
+  align-items: center;
+
+}
+
+.button {
+  margin-bottom: 10px; 
+  padding: 10px 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.button1 {
+  background-color: #5E17EB;
+  color: white;
+}
+
+.button2 {
+  background-color: white;
+  color: #000000;
+  border: 2px solid #5E17EB;
+}
+
+.trusted-section {
+  text-align: center;
+}
+
+.logos-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden; 
+}
+
+.logo {
+  width: 160px; 
+  height: 90px;
+}
+
+.logo img {
+  max-width: 180%; 
+}
+
+.logo {
+  animation: moveLogo 5s linear infinite; 
+}
+
+@keyframes moveLogo {
+  0% {
+    transform: translateX(-100%); 
+  }
+  100% {
+    transform: translateX(100%); 
+  }
+}
+
+.why-choose-section {
+  /* Add styling for the why-choose section */
+}
+
+.why-choose-section h2 {
+  /* Add styling for the heading */
+}
+
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.why-choose-item {
+  /* Add styling for each item in the grid */
+}
+
+.why-choose-item img {
+  /* Add styling for the images */
+}
+
+.why-choose-item h3 {
+  /* Add styling for the headings */
+}
+
+.why-choose-item ul{
+   list-style-type: circle;
+}
+
+
 
 @media only screen and (max-width: 600px) {
+
+.landing-page {
+  max-width: 1000px; 
+  margin: 0 auto; 
+  overflow-x: hidden;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -157,11 +307,11 @@ export default {
     padding: 20px;
 }
 
-.logo {
+.zikor-logo {
     align-self: flex-start; 
 }
 
-  .logo img {
+  .zikor-logo img {
     height: 35px;
     margin-top: 0;
   }
@@ -176,6 +326,7 @@ export default {
 
 .content {
   margin-top: 100px; 
+  align-items: center;
 }
 
 .centered-text {
@@ -183,8 +334,7 @@ export default {
   font-family: 'Poppins-ExtraLight';
   font-size: 22px; 
   color: #000000;
-  line-height: 2.2;
- 
+  line-height: 2.2; 
  }
 
 .centered-text h2 {
@@ -192,6 +342,7 @@ export default {
   color: #000000;
   font-family: 'Poppins-Bold';
   margin-top: -48px; 
+  text-align: center;
 }
 
 .centered-text p {
@@ -201,6 +352,111 @@ export default {
   margin: 0 auto; 
   max-width: 90%;
 }
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  margin-bottom: 10px; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.button1 {
+  background-color: #5E17EB;
+  color: white;
+}
+
+.button2 {
+  background-color: white;
+  color: #000000;
+  border: 1px solid #5E17EB;
+}
+
+.trusted-section {
+  text-align: center;
+}
+
+.trusted-section h2{
+    color: #000000;
+    font-size: 14px;
+    font-family: 'Poppins';
+}
+
+.logos-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden; 
+}
+
+.logo {
+  width: 100px; 
+}
+
+.logo img {
+  max-width: 100%; 
+}
+
+.logo {
+  animation: moveLogo 5s linear infinite; 
+}
+
+@keyframes moveLogo {
+  0% {
+    transform: translateX(-100%); 
+  }
+  100% {
+    transform: translateX(100%); 
+  }
+}
+
+.big-image {
+  align-items: center;
+  justify-content: center;
+
+}
+
+.big-image img {
+align-items: center;
+}
+
+.why-choose-section {
+  /* Add styling for the why-choose section */
+}
+
+.why-choose-section h2 {
+  /* Add styling for the heading */
+}
+
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.why-choose-item {
+  /* Add styling for each item in the grid */
+}
+
+.why-choose-item img {
+  /* Add styling for the images */
+}
+
+.why-choose-item h3 {
+  /* Add styling for the headings */
+}
+
+.why-choose-item ul {
+  /* Add styling for the description paragraphs */
+}
+
 
 }
 </style>
