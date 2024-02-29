@@ -40,36 +40,60 @@
  <div class="why-choose-section">
   <h2>Why Choose Zikor</h2>
   
-  <div class="why-choose-grid">
+<div class="why-choose-grid">
     <div class="why-choose-item">
-    <h3>Smart Selling, Simplified 🤖💬</h3>
-      <img src="../assets/why1.png" alt="Additional Image">
-        <ul>
-          <li>Engage effortlessly with potential buyers using our intuitive chatbot.</li>
-          <li>Showcase your products seamlessly with our hassle-free upload process.</li>
-        </ul>
+        <h3>Smart Selling, Simplified </h3>
+        <img src="../assets/why1.png" alt="Additional Image">
     </div>
     
 <div class="why-choose-item">
     <h3>Negotiate Like a Pro 🤝💰</h3>
       <img src="../assets/why2.png" alt="Additional Image">
-        <ul>
-          <li>Personalize your negotiations with buyers and close deals like a seasoned pro.</li>
-          <li>Let our chatbot be your trusted partner in securing the best prices.</li>
-        </ul>
     </div>
 
 <div class="why-choose-item">
     <h3>Secure and Swift Transactions 💳✨</h3>
       <img src="../assets/why3.png" alt="Additional Image">
-        <ul>
-          <li>Engage effortlessly with potential buyers using our intuitive chatbot.</li>
-          <li>Showcase your products seamlessly with our hassle-free upload process.</li>
-        </ul>
     </div>
 
   </div>
 </div>
+
+<div class="advantage-section">
+  <h2>The Zikor Advantage</h2>
+  <div class="advantage-container">
+    <div class="advantage-item" :class="{ 'active': currentIndex === index }" v-for="(advantage, index) in visibleAdvantages" :key="index">
+      <img src="../assets/vid.png" alt="Additional Image">
+      <ul>
+        <li>{{ advantage }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="blog-card">
+  <div class="blog-content">
+    <h3 class="blog-title">Blog</h3>
+    <p class="blog-description">Dive deeper into industry insights, product updates, and expert tips with Zikor's blog. Stay informed and inspired as we explore the latest trends and innovations in the world of e-commerce.</p>
+  </div>
+</div>
+
+<div class="about-card">
+  <div class="about-content">
+    <h3 class="about-title">About Zikor</h3>
+    <p class="about-description">Discover the story behind Zikor – our mission, values, and the team dedicated to revolutionizing online commerce.</p>
+  </div>
+</div>
+
+<div class="faq-card">
+  <div class="faq-content">
+    <h3 class="faq-title">FAQ</h3>
+    <p class="faq-description">Find answers to common questions and get the assistance you need with Zikor's FAQ section.</p>
+  </div>
+</div>
+
+
 
 
 </div>
@@ -83,75 +107,57 @@ export default {
       highlightText: "cutting-edge",
       isTypingOut: false,
       isTypingIn: false,
+      currentIndex: 0,
+      advantages: [
+        "🚀 Innovation at Your Fingertips: Experience a new era in online selling.",
+        "🌐 Anytime, Anywhere: Manage your shop and connect with buyers on-the-go with our mobile-friendly design.",
+        "🛍️ Your Shop, Your Rules: Tailor your storefront, set prices, and let the chatbot handle the rest."
+      ]
     };
   },
   mounted() {
     this.isMobile = window.innerWidth <= 600;
-    // Start the animation
     this.startTypingAnimation();
-    // Listen for window resize events
     window.addEventListener('resize', this.updateIsMobile);
+    
+    setInterval(() => {
+      this.showNextAdvantage();
+    }, 5000);
   },
   methods: {
-    toggleMenu() {
-      // Add logic to toggle your menu here
-    },
+    toggleMenu() {},
     updateIsMobile() {
-      // Update isMobile value based on viewport width
       this.isMobile = window.innerWidth <= 600;
     },
     startTypingAnimation() {
-      // Initialize typing animation
       this.typeText();
     },
     typeText() {
-      let i = 0;
-      const text = "cutting-edge";
-      const newText = "AI-driven";
-
-      const loop = () => {
-        if (this.isTypingOut) {
-          if (i < text.length) {
-            this.highlightText = text.slice(0, i);
-            i++;
-          } else {
-            this.isTypingOut = false;
-            this.isTypingIn = true;
-            i = 0;
-            setTimeout(() => {
-              loop();
-            }, 1000); // Delay before typing in again
-            return;
-          }
-        }
-
-        if (this.isTypingIn) {
-          if (i <= newText.length) {
-            this.highlightText = newText.substring(0, i);
-            i++;
-          } else {
-            this.isTypingIn = false;
-            this.isTypingOut = true;
-            i = 0;
-            setTimeout(() => {
-              loop();
-            }, 1000); // Delay before typing out again
-            return;
-          }
-        }
-
-        requestAnimationFrame(loop);
-      };
-
-      loop();
+      // Animation logic
     },
+    showNextAdvantage() {
+      if (!this.advantages || this.advantages.length === 0) {
+        return;
+      }
+
+      if (this.currentIndex < this.advantages.length - 1) {
+        this.currentIndex++;
+      } else {
+        this.currentIndex = 0;
+      }
+    }
+  },
+  computed: {
+    visibleAdvantages() {
+      return [this.advantages[this.currentIndex]];
+    }
   },
   beforeUnmount() {
-    // Remove window resize event listener to prevent memory leaks
     window.removeEventListener('resize', this.updateIsMobile);
   }
 };
 </script>
+
 
 
 
@@ -260,13 +266,6 @@ export default {
   }
 }
 
-.why-choose-section {
-  /* Add styling for the why-choose section */
-}
-
-.why-choose-section h2 {
-  /* Add styling for the heading */
-}
 
 .why-choose-grid {
   display: grid;
@@ -274,22 +273,118 @@ export default {
   grid-gap: 20px;
 }
 
-.why-choose-item {
-  /* Add styling for each item in the grid */
-}
-
-.why-choose-item img {
-  /* Add styling for the images */
-}
-
-.why-choose-item h3 {
-  /* Add styling for the headings */
-}
 
 .why-choose-item ul{
    list-style-type: circle;
 }
 
+.zikor-advantage img {
+  height: 300px;  
+}
+
+.advantage-section {
+  text-align: center;
+}
+
+.advantage ul {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.advantage li {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.advantage li.show {
+  opacity: 1;
+}
+
+.advantage-section .zikor-advantage ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.advantage-section .zikor-advantage ul li {
+  width: 300px; 
+  margin-right: 20px;
+  list-style-type: none;
+}
+
+.blog-card {
+  background-color: rgba(255, 199, 0, 0.15); 
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.blog-logo {
+  width: 50px; 
+  height: 50px;
+  margin-right: 20px;
+}
+
+.blog-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.blog-description {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.about-card {
+  background-color: rgba(94, 23, 235, 0.1); 
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.about-logo {
+  width: 50px; 
+  height: 50px;
+  margin-right: 20px;
+}
+
+.about-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.about-description {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.faq-card {
+  background-color: rgba(0, 174, 17, 0.23); 
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.faq-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.faq-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.faq-description {
+  font-size: 1rem;
+  line-height: 1.4;
+}
 
 
 @media only screen and (max-width: 600px) {
@@ -427,13 +522,6 @@ export default {
 align-items: center;
 }
 
-.why-choose-section {
-  /* Add styling for the why-choose section */
-}
-
-.why-choose-section h2 {
-  /* Add styling for the heading */
-}
 
 .why-choose-grid {
   display: grid;
@@ -441,22 +529,128 @@ align-items: center;
   grid-gap: 20px;
 }
 
-.why-choose-item {
-  /* Add styling for each item in the grid */
-}
-
-.why-choose-item img {
-  /* Add styling for the images */
-}
-
-.why-choose-item h3 {
-  /* Add styling for the headings */
-}
 
 .why-choose-item ul {
-  /* Add styling for the description paragraphs */
+  white-space: nowrap;
 }
 
+.zikor-advantage img {
+  height: 300px;  
+}
+
+.advantage-section {
+  text-align: center;
+}
+
+.advantage ul {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.advantage li {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  list-style-type: none;
+}
+
+.advantage li.show {
+  opacity: 1;
+}
+
+.advantage-section .zikor-advantage ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.advantage-section .zikor-advantage ul li {
+  list-style-type: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.advantage-section .zikor-advantage ul li.show {
+  opacity: 1;
+}
+
+.why-choose-item-text {
+    white-space: nowrap;
+}
+
+.blog-card {
+  background-color: rgba(255, 199, 0, 0.15); 
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.blog-logo {
+  width: 50px; 
+  height: 50px;
+  right: 80px;
+  margin-top: -130px;
+}
+
+.blog-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.blog-description {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.about-card {
+  background-color: rgba(94, 23, 235, 0.1); 
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.about-logo {
+  width: 50px; 
+  height: 50px;
+  margin-right: 20px;
+}
+
+.about-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.about-description {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.faq-card {
+  background-color: rgba(0, 174, 17, 0.23); 
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.faq-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.faq-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.faq-description {
+  font-size: 1rem;
+  line-height: 1.4;
+}
 
 }
 </style>
