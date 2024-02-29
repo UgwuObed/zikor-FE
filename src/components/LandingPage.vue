@@ -69,11 +69,7 @@
 <div class="advantage-section">
   <h2>The Zikor Advantage</h2>
   <div class="advantage-container">
-    <div class="advantage-item" :class="{ 'active': currentIndex === index }" v-for="(advantage, index) in visibleAdvantages" :key="index">
       <img src="../assets/vid.png" alt="Additional Image">
-            <p>{{ advantage }}</p>
-     
-    </div>
   </div>
 </div>
 
@@ -550,7 +546,7 @@ export default {
   }
 
   .hamburger-menu {
-    padding: 5px; 
+    padding: 1px; 
   }
 
   .hamburger-menu button {
@@ -558,7 +554,7 @@ export default {
   }
 
 .content {
-  margin-top: 100px; 
+  margin-top: 10px; 
   align-items: center;
 }
 
@@ -785,7 +781,7 @@ align-items: center;
 .advantage-item p{
   background-color: rgba(255, 129, 0, 0.18); 
   padding: 20px;
-  border-radius: 100px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
 }
