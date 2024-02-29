@@ -709,7 +709,6 @@ align-items: center;
 .blog-card {
   background-color: rgba(255, 199, 0, 0.15); 
   padding: 20px;
-  border-radius: 10px;
   display: flex;
   align-items: center;
 }
@@ -732,9 +731,8 @@ align-items: center;
 }
 
 .about-card {
-  background-color: rgba(94, 23, 235, 0.1); 
+  background-color: rgba(255, 199, 0, 0.15);
   padding: 20px;
-  border-radius: 10px;
   display: flex;
   align-items: center;
 }
@@ -756,8 +754,7 @@ align-items: center;
 }
 
 .faq-card {
-  background-color: rgba(0, 174, 17, 0.23); 
-  border-radius: 10px;
+  background-color: rgba(255, 199, 0, 0.15);  
   display: flex;
   align-items: center;
 }
