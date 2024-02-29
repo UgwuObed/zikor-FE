@@ -359,7 +359,6 @@ export default {
 .blog-card {
   background-color: rgba(255, 199, 0, 0.15); 
   padding: 20px;
-  border-radius: 10px;
   display: flex;
   align-items: center;
 }
@@ -381,9 +380,8 @@ export default {
 }
 
 .about-card {
-  background-color: rgba(94, 23, 235, 0.1); 
+  background-color: rgba(255, 199, 0, 0.15);
   padding: 20px;
-  border-radius: 10px;
   display: flex;
   align-items: center;
 }
@@ -405,8 +403,7 @@ export default {
 }
 
 .faq-card {
-  background-color: rgba(0, 174, 17, 0.23); 
-  border-radius: 10px;
+  background-color: rgba(255, 199, 0, 0.15); 
   display: flex;
   align-items: center;
 }
