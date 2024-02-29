@@ -64,9 +64,8 @@
   <div class="advantage-container">
     <div class="advantage-item" :class="{ 'active': currentIndex === index }" v-for="(advantage, index) in visibleAdvantages" :key="index">
       <img src="../assets/vid.png" alt="Additional Image">
-      <ul>
-        <li>{{ advantage }}</li>
-      </ul>
+            <p>{{ advantage }}</p>
+     
     </div>
   </div>
 </div>
@@ -93,7 +92,46 @@
   </div>
 </div>
 
-
+ <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <p class="footer-text">
+          Join the community of sellers who've embraced a new way to connect with buyers and close deals effortlessly.
+        </p>
+        <button class="get-started-button">Get Started</button>
+        <div class="app-icons">
+         <img src="@/assets/app-store.png" alt="Play Store Icon" class="app-icon">
+          <img src="@/assets/google-play.png" alt="App Store Icon" class="app-icon">
+          <span class="coming-soon-text">App Coming Soon</span>
+        </div>
+      </div>
+      <div class="footer-right">
+    <div class="quick-links">
+      <h4 class="quick-links-title">Quick Links</h4>
+      <ul>
+        <li><a href="#" class="link">Blog</a></li>
+        <li><a href="#" class="link">About Zikor</a></li>
+        <li><a href="#" class="link">FAQ</a></li>
+        <li><a href="#" class="link">Contact Us</a></li>
+      </ul>
+    </div>
+        <div class="social-media">
+          <h4 class="social-media-title">Connect with Us:</h4>
+          <div class="social-media-icons">
+            <img src="@/assets/x.png" alt="Social Media Icon">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">Copyright © 2024 Zikor. All rights reserved.</p>
+      <nav class="footer-nav">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </nav>
+    </div>
+  </footer>
 
 
 </div>
@@ -110,8 +148,8 @@ export default {
       currentIndex: 0,
       advantages: [
         "🚀 Innovation at Your Fingertips: Experience a new era in online selling.",
-        "🌐 Anytime, Anywhere: Manage your shop and connect with buyers on-the-go with our mobile-friendly design.",
-        "🛍️ Your Shop, Your Rules: Tailor your storefront, set prices, and let the chatbot handle the rest."
+        "🌐 Anytime, Anywhere: Manage your shop and connect with buyers on-the-go.",
+        "🛍️ Your Shop, Your Rules: Tailor your storefront, and let the chatbot handle the rest."
       ]
     };
   },
@@ -386,6 +424,99 @@ export default {
   line-height: 1.4;
 }
 
+.footer {
+  background-color: #5E17EB;
+  color: white;
+  padding: 50px 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer-left {
+  max-width: 50%;
+}
+
+.footer-text {
+  margin-bottom: 20px;
+}
+
+.get-started-button {
+  background-color: white;
+  color: #5E17EB;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.app-icons {
+  display: flex;
+  align-items: center;
+}
+
+.app-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.coming-soon-text {
+  font-style: italic;
+}
+
+.footer-right {
+  max-width: 50%;
+}
+
+.quick-links-title,
+.social-media-title {
+  margin-bottom: 10px;
+}
+
+
+
+.footer-bottom {
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+.quick-links ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.quick-links ul li {
+  margin-bottom: 10px;
+}
+
+.quick-links ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.quick-links ul li a:hover {
+  text-decoration: underline;
+}
+
 
 @media only screen and (max-width: 600px) {
 
@@ -566,15 +697,7 @@ align-items: center;
   padding: 0;
 }
 
-.advantage-section .zikor-advantage ul li {
-  list-style-type: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
 
-.advantage-section .zikor-advantage ul li.show {
-  opacity: 1;
-}
 
 .why-choose-item-text {
     white-space: nowrap;
@@ -650,6 +773,107 @@ align-items: center;
 .faq-description {
   font-size: 1rem;
   line-height: 1.4;
+}
+
+.advantage-item p{
+  background-color: rgba(255, 129, 0, 0.18); 
+  padding: 20px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  background-color: #5E17EB;
+  color: white;
+  padding: 50px 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer-left {
+  max-width: 50%;
+}
+
+.footer-text {
+  margin-bottom: 20px;
+}
+
+.get-started-button {
+  background-color: white;
+  color: #5E17EB;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.app-icons {
+  display: flex;
+  align-items: center;
+}
+
+.app-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.coming-soon-text {
+  font-style: italic;
+}
+
+.footer-right {
+  max-width: 50%;
+}
+
+.quick-links-title,
+.social-media-title {
+  margin-bottom: 10px;
+
+}
+
+
+.footer-bottom {
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+.quick-links ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.quick-links ul li {
+  margin-bottom: 10px;
+}
+
+.quick-links ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.quick-links ul li a:hover {
+  text-decoration: underline;
 }
 
 }
