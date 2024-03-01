@@ -943,7 +943,7 @@ align-items: center;
 
 .menu-item button,
 .menu-item img {
-  padding: 10px;
+  padding: 5px;
   width: 30px;
 }
 
