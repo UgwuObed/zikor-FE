@@ -5,9 +5,37 @@
         <img src="../assets/zikor-logo.png" alt="Logo">
       </div>
       <div class="hamburger-menu" v-if="isMobile">
-        <button @click="toggleMenu">☰</button>
-      </div>
+        <template v-if="!showMenu">
+          <button @click="toggleMenu">☰</button>
+        </template>
+        <template v-else>
+          <button @click="toggleMenu" style="z-index: 1;">X</button>
+        </template>
+        </div>
+        </div>
+
+     <div v-if="showMenu" class="navigation">
+      <ul class="menu-list">
+        <li class="menu-item">Chat Zikor</li>
+        <li class="menu-item">Shop</li>
+        <li class="menu-item"><img src="../assets/upload-icon.png" alt="Upload"> Upload</li>
+        <li class="menu-item"><img src="../assets/user-icon.png" alt="User"> Zikor</li>
+        <li class="menu-item"><img src="../assets/money-icon.png" alt="Money"> Payment</li>
+        <li class="menu-item"><img src="../assets/handshake-icon.png" alt="Handshake"> Negotiate</li>
+        <li class="menu-item">Pricing</li>
+        <li class="menu-item">More</li>
+        <li class="menu-item"><img src="../assets/info-icon.png" alt="Info"> About Zikor</li>
+        <li class="menu-item"><img src="../assets/newspaper-icon.png" alt="Newspaper"> Blog</li>
+        <li class="menu-item"><img src="../assets/question-icon.png" alt="Question"> FAQ</li>
+
+            <li class="menu-item close-menu">
+      <button @click="toggleMenu">
+        <img src="../assets/close-icon.png" alt="Close Menu">
+      </button>
+    </li>
+      </ul>
     </div>
+
 
 <div class="advantage-container">
     <div class="advantage-item" :class="{ 'active': currentIndex === index }" v-for="(advantage, index) in visibleAdvantages" :key="index">
@@ -153,7 +181,9 @@ export default {
         "🚀 Innovation at Your Fingertips: Experience a new era in online selling.",
         "🌐 Anytime, Anywhere: Manage your shop and connect with buyers on-the-go.",
         "🛍️ Your Shop, Your Rules: Tailor your storefront, and let the chatbot handle the rest."
-      ]
+      ],
+
+      showMenu: false
     };
   },
   mounted() {
@@ -166,12 +196,14 @@ export default {
     }, 5000);
   },
   methods: {
-    toggleMenu() {},
     updateIsMobile() {
       this.isMobile = window.innerWidth <= 600;
     },
     startTypingAnimation() {
       this.typeText();
+    },
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
     },
     typeText() {
       // Animation logic
@@ -872,6 +904,45 @@ align-items: center;
 .quick-links ul li a:hover {
   text-decoration: underline;
 }
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  opacity: 0.9;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.navigation.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  padding: 15px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+  background-color: #f5f5f5;
+}
+
 
 }
 </style>
