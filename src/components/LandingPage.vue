@@ -18,7 +18,7 @@
         <img src="../assets/close-icon.png" alt="Close Menu">
       </button>
     </li>
-        <li class="menu-item">Chat Zikor</li>
+        <li class="menu-item" style="font-weight: bold;">Chat Zikor</li>
         <br>
         <li class="menu-item" style="font-weight: bold;">Shop</li>
         <li class="menu-item"><img src="../assets/upload-icon.png" alt="Upload"> Upload</li>
@@ -26,7 +26,7 @@
         <li class="menu-item"><img src="../assets/money-icon.png" alt="Money"> Payment</li>
         <li class="menu-item"><img src="../assets/handshake-icon.png" alt="Handshake"> Negotiate</li>
         <br>
-        <li class="menu-item">Pricing</li>
+        <li class="menu-item" style="font-weight: bold;">Pricing</li>
         <br>
         <li class="menu-item" style="font-weight: bold;">More</li>
         <li class="menu-item"><img src="../assets/info-icon.png" alt="Info"> About Zikor</li>
@@ -40,7 +40,6 @@
       </ul>
 
     </div>
-
 
 <div class="advantage-container">
     <div class="advantage-item" :class="{ 'active': currentIndex === index }" v-for="(advantage, index) in visibleAdvantages" :key="index">
@@ -84,13 +83,11 @@
     <div class="why-choose-item">
         <h3>Smart Selling, Simplified </h3>
         <img src="../assets/why1.png" alt="Additional Image">
-    </div>
-    
+    </div>  
 <div class="why-choose-item">
     <h3>Negotiate Like a Pro 🤝💰</h3>
       <img src="../assets/why2.png" alt="Additional Image">
     </div>
-
 <div class="why-choose-item">
     <h3>Secure and Swift Transactions 💳✨</h3>
       <img src="../assets/why3.png" alt="Additional Image">
@@ -105,7 +102,6 @@
       <img src="../assets/vid.png" alt="Additional Image">
   </div>
 </div>
-
 
 <div class="blog-card">
   <div class="blog-content">
@@ -954,7 +950,7 @@ align-items: center;
 .close-menu {
   position: absolute;
   top: 10px;
-  right: 5px;
+  right: 10px;
 }
 
 .close-menu button {
@@ -982,7 +978,7 @@ align-items: center;
 }
 
 .signup-button, .login-button {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 15px 80px;
   font-size: 16px;
   border: none;
