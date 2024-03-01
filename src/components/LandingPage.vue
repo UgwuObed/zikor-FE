@@ -8,32 +8,37 @@
         <template v-if="!showMenu">
           <button @click="toggleMenu">☰</button>
         </template>
-        <template v-else>
-          <button @click="toggleMenu" style="z-index: 1;">X</button>
-        </template>
         </div>
         </div>
 
      <div v-if="showMenu" class="navigation">
       <ul class="menu-list">
-        <li class="menu-item">Chat Zikor</li>
-        <li class="menu-item">Shop</li>
-        <li class="menu-item"><img src="../assets/upload-icon.png" alt="Upload"> Upload</li>
-        <li class="menu-item"><img src="../assets/user-icon.png" alt="User"> Zikor</li>
-        <li class="menu-item"><img src="../assets/money-icon.png" alt="Money"> Payment</li>
-        <li class="menu-item"><img src="../assets/handshake-icon.png" alt="Handshake"> Negotiate</li>
-        <li class="menu-item">Pricing</li>
-        <li class="menu-item">More</li>
-        <li class="menu-item"><img src="../assets/info-icon.png" alt="Info"> About Zikor</li>
-        <li class="menu-item"><img src="../assets/newspaper-icon.png" alt="Newspaper"> Blog</li>
-        <li class="menu-item"><img src="../assets/question-icon.png" alt="Question"> FAQ</li>
-
-            <li class="menu-item close-menu">
+    <li class="menu-item close-menu">
       <button @click="toggleMenu">
         <img src="../assets/close-icon.png" alt="Close Menu">
       </button>
     </li>
+        <li class="menu-item">Chat Zikor</li>
+        <br>
+        <li class="menu-item" style="font-weight: bold;">Shop</li>
+        <li class="menu-item"><img src="../assets/upload-icon.png" alt="Upload"> Upload</li>
+        <li class="menu-item"><img src="../assets/user-icon.png" alt="User"> Zikor</li>
+        <li class="menu-item"><img src="../assets/money-icon.png" alt="Money"> Payment</li>
+        <li class="menu-item"><img src="../assets/handshake-icon.png" alt="Handshake"> Negotiate</li>
+        <br>
+        <li class="menu-item">Pricing</li>
+        <br>
+        <li class="menu-item" style="font-weight: bold;">More</li>
+        <li class="menu-item"><img src="../assets/info-icon.png" alt="Info"> About Zikor</li>
+        <li class="menu-item"><img src="../assets/newspaper-icon.png" alt="Newspaper"> Blog</li>
+        <li class="menu-item"><img src="../assets/question-icon.png" alt="Question"> FAQ</li>
+
+    <div class="buttons">
+    <button class="signup-button">Sign Up</button>
+    <button class="login-button">Login</button>
+  </div>
       </ul>
+
     </div>
 
 
@@ -911,13 +916,10 @@ align-items: center;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #fff;
+  background-color:  #FAF9FF;
   z-index: 999;
   display: flex;
-  justify-content: center;
-  align-items: left;
-  opacity: 0.9;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 8.8s ease-in-out;
 }
 
 .navigation.hidden {
@@ -927,20 +929,83 @@ align-items: center;
 
 .menu-list {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 50px;
 }
 
 .menu-item {
-  padding: 15px;
-  font-size: 16px;
-  text-align: center;
+  font-size: 25px;
+  text-align: left;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 1.3s ease-in-out;
+  display: flex; 
+  align-items: center;
+}
+
+.menu-item button,
+.menu-item img {
+  padding: 10px;
+  width: 50px;
 }
 
 .menu-item:hover {
-  background-color: #f5f5f5;
+  background-color: rgba(255, 129, 0, 0.18); 
+}
+
+.close-menu {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+}
+
+.close-menu button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.close-menu img {
+  width: 20px; 
+}
+
+.close-menu button:hover img {
+  filter: brightness(0.8); 
+}
+
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+  margin-left: 55px; 
+
+}
+
+.signup-button, .login-button {
+  margin-top: 20px;
+  padding: 15px 80px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.signup-button {
+  background-color: #5E17EB;
+  color: #fff;
+}
+
+.login-button {
+  background-color: #fff;
+  border: 1px solid #5E17EB;
+  padding: 15px 88px;
+  color: #000;
+}
+
+.login-button:hover {
+  background-color: #5E17EB;
+  color: #fff;
 }
 
 
