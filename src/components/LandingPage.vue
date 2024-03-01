@@ -925,7 +925,7 @@ align-items: center;
 
 .menu-list {
   list-style: none;
-  padding: 50px;
+  padding: 20px;
 }
 
 .menu-item {
@@ -973,8 +973,8 @@ align-items: center;
   display: flex;
   flex-direction: column;
   align-items: flex-end; 
-  margin-left: 55px; 
-
+  margin-left: 60px; 
+  text-align: center;
 }
 
 .signup-button, .login-button {
