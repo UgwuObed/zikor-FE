@@ -933,7 +933,7 @@ align-items: center;
 }
 
 .menu-item {
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
   cursor: pointer;
   transition: background-color 1.3s ease-in-out;
@@ -944,7 +944,7 @@ align-items: center;
 .menu-item button,
 .menu-item img {
   padding: 10px;
-  width: 40px;
+  width: 30px;
 }
 
 .menu-item:hover {
