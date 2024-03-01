@@ -576,7 +576,7 @@ export default {
   }
 
   .hamburger-menu {
-    padding: 1px; 
+    padding: -100px; 
   }
 
   .hamburger-menu button {
