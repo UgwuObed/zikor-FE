@@ -34,7 +34,9 @@
         <li class="menu-item"><img src="../assets/question-icon.png" alt="Question"> FAQ</li>
 
     <div class="buttons">
-    <button class="signup-button">Sign Up</button>
+    <router-link to="/sign-up">
+     <button class="signup-button">Sign Up</button>
+   </router-link>
     <button class="login-button">Login</button>
   </div>
       </ul>
@@ -57,7 +59,11 @@
         </p>
       </div>
     <div class="button-container">
-            <button class="button button1">Start Now</button>
+
+    <router-link to="/sign-up">
+     <button class="button button1">Start Now</button>
+   </router-link>
+            
             <button class="button button2">About</button>
         </div>
     </div>
@@ -130,7 +136,9 @@
         <p class="footer-text">
           Join the community of sellers who've embraced a new way to connect with buyers and close deals effortlessly.
         </p>
+        <router-link to="/sign-up">
         <button class="get-started-button">Get Started</button>
+        </router-link>
         <div class="app-icons">
          <img src="@/assets/app-store.png" alt="Play Store Icon" class="app-icon">
           <img src="@/assets/google-play.png" alt="App Store Icon" class="app-icon">
