@@ -8,17 +8,17 @@
     <div class="form-group">
       <label for="first-name">First Name</label>
       <input type="text" id="first-name" v-model="firstName" @blur="checkFirstName">
-      <p v-if="firstNameTouched && !firstName" class="error-message">Please enter your first name</p>
+      <p v-if="firstNameTouched && !firstName" class="error-message">First name cannot be empty</p>
     </div>
     <div class="form-group">
       <label for="last-name">Last Name</label>
       <input type="text" id="last-name" v-model="lastName" @blur="checkLastName">
-      <p v-if="lastNameTouched && !lastName" class="error-message">Please enter your last name</p>
+      <p v-if="lastNameTouched && !lastName" class="error-message">Last name connot be empty</p>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" id="email" v-model="email" @blur="checkEmail">
-      <p v-if="emailTouched && !email" class="error-message">Please enter your email</p>
+      <p v-if="emailTouched && !email" class="error-message">Please provied email</p>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
@@ -45,25 +45,14 @@ export default {
     };
   },
   methods: {
-    signup() {
-      this.firstNameTouched = true;
-      this.lastNameTouched = true;
-      this.emailTouched = true;
-      this.passwordTouched = true;
-      
-      // Check if any field is empty
-      if (!this.firstName || !this.lastName || !this.email || !this.password) {
-        alert("Please fill in all fields.");
-        return;
-      }
-      
-      // You can perform signup action here
-      // Redirect to setup business page
-      this.$router.push('/setup-business');
+    validateSignup() {
+      return this.firstName && this.lastName && this.email && this.password;
     },
+
     signIn() {
       this.$router.push('/signin');
     },
+
     checkFirstName() {
       this.firstNameTouched = true;
     },
@@ -75,8 +64,20 @@ export default {
     },
     checkPassword() {
       this.passwordTouched = true;
-    }
+    },
+signup() {
+  if (this.validateSignup()) {
+    // Set touched flags to true only if the form is valid
+    this.firstNameTouched = true;
+    this.lastNameTouched = true;
+    this.emailTouched = true;
+    this.passwordTouched = true;
+
+    // Redirect to the business setup page
+    this.$router.push('/setup-business');
   }
+  }
+ }
 };
 </script>
 
