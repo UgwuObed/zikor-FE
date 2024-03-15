@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from './components/LandingPage.vue';
 import SignUpForm from '@/components/SignUpForm.vue';
-import SetupBusinessPage from '@/components/SetupBusinessPage.vue';
+import HomePage from '@/components/HomePage.vue';
+import LoginPage from '@/components/LoginPage.vue';
 
 const routes = [
   {
@@ -15,10 +16,17 @@ const routes = [
       component: SignUpForm
     },
 
+      {
+      path: '/home',
+      name: 'HomePage',
+      component: HomePage,
+      meta: { requiresAuth: true }
+    },
+
     {
-      path: '/setup-business',
-      name: 'SetupBusinessPage',
-      component: SetupBusinessPage
+      path: '/login',
+      name: 'LoginPage',
+      component: LoginPage
     }
 ]
 
@@ -26,5 +34,14 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/sign-up');
+  } else {
+    next();
+  }
+});
 
 export default router
