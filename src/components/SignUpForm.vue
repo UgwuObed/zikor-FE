@@ -32,7 +32,7 @@
   <p v-if="passwordConfirmationTouched && !password_confirmation" class="error-message">Please confirm your password</p>
 </div>
       <button @click="submitSignup">Sign Up</button>
-      <p>Already have an account? <a href="#" @click="signIn">Sign In</a></p>
+      <p>Already have an account? <router-link to="/login">Sign In</router-link></p>
     </div>
 
     <div v-if="currentStep === 'business-setup'" class="setup-business-page">
@@ -70,6 +70,9 @@
       <input type="text" id="city" v-model="city" @blur="checkCity">
       <p v-if="cityTouched && !city" class="error-message">Please enter your city</p>
     </div>
+        <div v-if="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
       <button @click="submitForms">Continue</button>
     </div>
   </div>
@@ -99,6 +102,7 @@ export default {
 
       // Step management
       currentStep: 'signup',
+      errorMessage: '',
     };
   },
   methods: {
@@ -106,6 +110,11 @@ export default {
     routeExists(route) {
     return this.$router.options.routes.some(r => r.path === route);
   },
+
+    signIp() {
+      this.$router.push('/login');
+    },
+
 
   logout() {
     localStorage.removeItem('isAuthenticated');
@@ -123,7 +132,6 @@ export default {
     },
     submitSignup() {
       if (this.validateSignup()) {
-        // Move to the next step after successful signup
         this.currentStep = 'business-setup';
       }
     },
@@ -144,6 +152,9 @@ export default {
 },
 
 submitForms() {
+  // Reset errorMessage before making the request
+  this.errorMessage = '';
+
   if (this.validateSignup() && this.validateBusinessSetup()) {
     const formData = this.prepareFormData();
 
@@ -164,10 +175,17 @@ submitForms() {
       })
       .catch(error => {
         console.error('Submission failed:', error);
+
+        if (error.response && error.response.data && error.response.data.errors) {
+          console.log('Error response:', error.response.data); 
+          const errors = error.response.data.errors;
+          this.errorMessage = errors[Object.keys(errors)[0]][0];
+        } else {
+          this.errorMessage = 'An error occurred while processing your request. Please try again later.';
+        }
       });
   }
 },
-
 
 
     // Separate validation methods for clarity (can be combined if desired)
