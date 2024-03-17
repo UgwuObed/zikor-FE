@@ -1,5 +1,8 @@
 <template>
   <div class="login-workflow">
+   <div v-if="isLoading" class="loading-overlay">
+    <img src="../assets/loading.gif" alt="Loading">
+  </div>
     <div v-if="currentStep === 'login'" class="login-form">
       <div class="zikor-logo">
         <img src="../assets/zikor-logo.png" alt="Logo">
@@ -45,6 +48,8 @@ export default {
 
       // Error message
       errorMessage: '',
+
+      isLoading: false,
     };
   },
   methods: {
@@ -62,6 +67,9 @@ export default {
     },
 
    submitLogin() {
+
+   this.isLoading = true;
+
   if (this.validateLogin()) {
     const formData = {
       email: this.email,
@@ -70,18 +78,20 @@ export default {
 
     axios.post(`${BASE_URL}/login`, formData)
       .then(response => {
-        console.log('Login successful:', response.data);
         this.handleLoginSuccess(response.data);
+
+        this.isLoading = false;
       })
       .catch(error => {
         console.error('Login failed:', error);
 
-        // Check if the error is a 422 Unprocessable Entity
         if (error.response && error.response.status === 422) {
           this.errorMessage = 'Invalid email or password. Please try again.';
         } else {
           this.errorMessage = 'An error occurred while processing your request. Please try again later.';
         }
+
+        this.isLoading = false;
       });
   } else {
     this.errorMessage = 'Please fill in all fields.'; 
@@ -125,13 +135,6 @@ export default {
   overflow-x: hidden;
   font-family: 'Poppins';
 }
-.form-group {
-  margin-bottom: 30px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
 
 .form-group {
   margin-bottom: 20px;
@@ -142,65 +145,11 @@ export default {
 label {
   display: block; 
 }
-
-input[type="email"],
-input[type="password"] {
-  width: 90%;
-  height: 40px; 
-  border: 1px solid #5E17EB;
-  background-color: white;
-  border-radius: 5px;
-  outline: none;
-}
-
-  button {
-    padding: 20px 40px;
-    background-color: #5E17EB;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    width: 50%;
-    height: 35px;
-    align-item: center;
-    line-height: 2px;
-    font-family: 'Poppins-Bold';
-    font-size: 12px;
-  }
-
-  .zikor-logo {
-    align-self: flex-start; 
-    margin-right: 290px;
-    }
-
-  .zikor-logo img {
-    height: 35px;
-    margin-top: 0;
-  }
 
 .error-message {
   color: red;
   margin-top: 5px;
 }
-
-
-.form-group {
-  margin-bottom: 30px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
-  margin-left: 10px;
-}
-
-label {
-  display: block; 
-}
-
 
 input[type="email"],
 input[type="password"] {
@@ -245,6 +194,23 @@ input[type="password"] {
  font-size: 14px;
  }
 
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-overlay {
+  max-width: 100%;
+  max-height: 100%;
+}
 
 }
 </style>

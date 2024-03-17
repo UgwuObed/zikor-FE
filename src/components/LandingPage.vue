@@ -37,7 +37,10 @@
     <router-link to="/sign-up">
      <button class="signup-button">Sign Up</button>
    </router-link>
+
+   <router-link to="/login">
     <button class="login-button">Login</button>
+    </router-link>
   </div>
       </ul>
 

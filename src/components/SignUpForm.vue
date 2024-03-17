@@ -1,5 +1,8 @@
 <template>
   <div class="signup-workflow">
+  <div v-if="isLoading" class="loading-overlay">
+    <img src="../assets/loading.gif" alt="Loading">
+  </div>
     <div v-if="currentStep === 'signup'" class="signup-form">
         <div class="zikor-logo">
       <img src="../assets/zikor-logo.png" alt="Logo">
@@ -117,6 +120,8 @@ export default {
       // Step management
       currentStep: 'signup',
       errorMessage: '',
+
+      isLoading: false,
     };
   },
   methods: {
@@ -166,7 +171,10 @@ export default {
 },
 
 submitForms() {
-  // Reset errorMessage before making the request
+  
+  this.isLoading = true;
+
+
   this.errorMessage = '';
 
   if (this.validateSignup() && this.validateBusinessSetup()) {
@@ -186,6 +194,7 @@ submitForms() {
         } else {
           console.error('Redirect URL not found in response.');
         }
+        this.isLoading = false;
       })
       .catch(error => {
         console.error('Submission failed:', error);
@@ -197,10 +206,10 @@ submitForms() {
         } else {
           this.errorMessage = 'An error occurred while processing your request. Please try again later.';
         }
+        this.isLoading = false;
       });
   }
 },
-    // Separate validation methods for clarity (can be combined if desired)
     validateBusinessSetup() {
       return (
         this.business_name &&
@@ -224,13 +233,7 @@ submitForms() {
   overflow-x: hidden;
   font-family: 'Poppins';
 }
-.form-group {
-  margin-bottom: 30px;
-}
 
-.form-group {
-  margin-bottom: 20px;
-}
 
 .form-group {
   margin-bottom: 20px;
@@ -242,35 +245,11 @@ label {
   display: block; 
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 90%;
-  height: 40px; 
-  border: 1px solid #5E17EB;
-  background-color: white;
-  border-radius: 5px;
-  outline: none;
-}
+.zikor-logo {
 
-  button {
-    padding: 20px 40px;
-    background-color: #5E17EB;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    width: 50%;
-    height: 35px;
-    align-item: center;
-    line-height: 2px;
-    font-family: 'Poppins-Bold';
-    font-size: 12px;
-  }
-
-  .zikor-logo {
     align-self: flex-start; 
     margin-right: 290px;
-    }
+   }
 
   .zikor-logo img {
     height: 35px;
@@ -289,30 +268,13 @@ input[type="password"] {
   overflow-x: hidden;
   font-family: 'Poppins';
 }
-.form-group {
-  margin-bottom: 30px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
-  margin-left: 10px;
-}
-
-label {
-  display: block; 
-}
 
 input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="password"] {
   width: 90%;
-  height: 30px; 
+  height: 38px; 
   border: 1px solid #5E17EB;
   background-color: white;
   border-radius: 5px;
@@ -354,6 +316,24 @@ input[type="password"] {
   width: 24px;
   height: 24px;
   margin-right: 340px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-overlay {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 }
