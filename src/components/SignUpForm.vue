@@ -36,9 +36,23 @@
     </div>
 
     <div v-if="currentStep === 'business-setup'" class="setup-business-page">
-    <div class="zikor-logo">
-      <img src="../assets/zikor-logo.png" alt="Logo">
-    </div>
+ <div class="back-button" @click="goBack">
+        <!-- SVG icon code -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="back-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </div>
+
+
     <h2>Set Up Business Page</h2>
     <p>Create your business page now to seize new opportunities.</p>
     <div class="form-group">
@@ -107,13 +121,13 @@ export default {
   },
   methods: {
 
+  goBack() {
+    this.currentStep = 'signup';
+  },
+
     routeExists(route) {
     return this.$router.options.routes.some(r => r.path === route);
   },
-
-    signIp() {
-      this.$router.push('/login');
-    },
 
 
   logout() {
@@ -186,8 +200,6 @@ submitForms() {
       });
   }
 },
-
-
     // Separate validation methods for clarity (can be combined if desired)
     validateBusinessSetup() {
       return (
@@ -321,16 +333,6 @@ input[type="password"] {
     font-size: 13px;
   }
 
-  .zikor-logo {
-    align-self: flex-start; 
-    margin-right: 290px;
-    }
-
-  .zikor-logo img {
-    height: 35px;
-    margin-top: 0;
-  }
-
 .error-message {
   color: red;
   margin-top: 5px;
@@ -340,6 +342,19 @@ input[type="password"] {
  font-size: 14px;
  }
 
+.back-button {
+  display: inline-flex; 
+  align-items: center; 
+  text-decoration: none; 
+  color: #5E17EB; 
+  font-weight: bold;
+}
+
+.back-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 340px;
+}
 
 }
 </style>
