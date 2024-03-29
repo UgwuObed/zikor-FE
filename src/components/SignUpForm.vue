@@ -120,26 +120,20 @@ export default {
       // Step management
       currentStep: 'signup',
       errorMessage: '',
-
       isLoading: false,
     };
   },
   methods: {
-
-  goBack() {
-    this.currentStep = 'signup';
-  },
-
+    goBack() {
+      this.currentStep = 'signup';
+    },
     routeExists(route) {
-    return this.$router.options.routes.some(r => r.path === route);
-  },
-
-
-  logout() {
-    localStorage.removeItem('isAuthenticated');
-    this.$router.push('/login');
-  },
-
+      return this.$router.options.routes.some(r => r.path === route);
+    },
+    logout() {
+      localStorage.removeItem('isAuthenticated');
+      this.$router.push('/login');
+    },
     // Signup form validation and submission
     validateSignup() {
       return (
@@ -154,8 +148,7 @@ export default {
         this.currentStep = 'business-setup';
       }
     },
-
-  prepareFormData() {
+    prepareFormData() {
       return {
         first_name: this.first_name,
         last_name: this.last_name,
@@ -167,49 +160,8 @@ export default {
         country: this.country,
         state: this.state,
         city: this.city,
-  };
-},
-
-submitForms() {
-  
-  this.isLoading = true;
-
-
-  this.errorMessage = '';
-
-  if (this.validateSignup() && this.validateBusinessSetup()) {
-    const formData = this.prepareFormData();
-
-    axios.post(`${BASE_URL}/register`, formData)
-      .then(response => {
-        console.log('Signup and business setup successful:', response.data);
-        const redirectUrl = response.data.redirect;
-        if (redirectUrl) {
-          if (this.routeExists(redirectUrl)) {
-            localStorage.setItem('isAuthenticated', true);
-            window.location.href = redirectUrl;
-          } else {
-            console.error('Redirect URL does not exist on the frontend:', redirectUrl);
-          }
-        } else {
-          console.error('Redirect URL not found in response.');
-        }
-        this.isLoading = false;
-      })
-      .catch(error => {
-        console.error('Submission failed:', error);
-
-        if (error.response && error.response.data && error.response.data.errors) {
-          console.log('Error response:', error.response.data); 
-          const errors = error.response.data.errors;
-          this.errorMessage = errors[Object.keys(errors)[0]][0];
-        } else {
-          this.errorMessage = 'An error occurred while processing your request. Please try again later.';
-        }
-        this.isLoading = false;
-      });
-  }
-},
+      };
+    },
     validateBusinessSetup() {
       return (
         this.business_name &&
@@ -219,9 +171,58 @@ submitForms() {
         this.city
       );
     },
+    submitForms() {
+       
+       localStorage.removeItem('accessToken');
+       
+      this.isLoading = true;
+      this.errorMessage = '';
+
+      if (this.validateSignup() && this.validateBusinessSetup()) {
+        const formData = this.prepareFormData();
+
+        axios.post(`${BASE_URL}/api/register`, formData)
+          .then(response => {
+
+            const {token, redirect } = response.data;
+
+
+            // Store the access token in localStorage for later use
+            localStorage.setItem('accessToken', token);
+
+
+            // Check if a redirect URL is provided
+            if (redirect) {
+              if (this.routeExists(redirect)) {
+                // Redirect to the specified URL
+                window.location.href = redirect;
+              } else {
+                console.error('Redirect URL does not exist on the frontend:', redirect);
+              }
+            } else {
+              console.error('Redirect URL not found in response.');
+            }
+            this.isLoading = false;
+          })
+          .catch(error => {
+            console.error('Registration failed:', error);
+
+            // Handle errors
+            if (error.response && error.response.data && error.response.data.errors) {
+              console.log('Error response:', error.response.data); 
+              const errors = error.response.data.errors;
+              this.errorMessage = errors[Object.keys(errors)[0]][0];
+            } else {
+              this.errorMessage = 'An error occurred while processing your request. Please try again later.';
+            }
+            this.isLoading = false;
+          });
+      }
+    },
   },
 };
 </script>
+
 
 <style scoped>
 
@@ -279,6 +280,8 @@ input[type="password"] {
   background-color: white;
   border-radius: 5px;
   outline: none;
+  font-size: 16px !important; 
+  -webkit-user-select: text !important;
 }
 
   button {

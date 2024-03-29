@@ -1,54 +1,81 @@
 <template>
   <div class="add-product">
-    <div v-if="currentStep === 'step1'">
+    <form @submit.prevent="uploadProduct" v-if="currentStep === 'step1'">
       <h3>Add Product</h3>
       <div class="form-group">
-        <input type="text" id="product-name" v-model="productName" placeholder="Product Name">
+        <input type="text" id="product-name" v-model="name" placeholder="Product Name">
+        <!-- Error message for name -->
+        <div class="error-message error-red" v-if="errorMessage && !name">Please enter a product name.</div>
       </div>
+
       <div class="form-group">
-        <input type="number" id="product-price" v-model="productPrice" placeholder="Product Price(No comma)">
+        <input type="number" id="product-price" v-model="main_price" placeholder="Product Price(No comma)">
+        <!-- Error message for main_price -->
+        <div class="error-message error-red" v-if="errorMessage && !main_price">Please enter a product price.</div>
       </div>
-      <div class="form-group">
-        <input type="number" id="discount-price" v-model="discountPrice" placeholder="Discount Price(No comma)">
-      </div>
-       <div class="discount-note">
-          <span class="note-label">Note:</span>
-          <br>
-          <span class="note-text">
-            Set a discount price to help our bot negotiate and 
-            increase your chances of closing deals faster!
-          </span>
+
+       <div class="form-group">
+        <input type="number" id="discount-price" v-model="discount_price" placeholder="Discount Price(No comma)(Optional)">
+        <div class="error-message error-red" v-if="validateDiscountPrice">
+         Discount should be lower than the main price.
         </div>
+      </div>
+
+
+      <div class="discount-note">
+        <span class="note-label">Note:</span>
+        <br>
+        <span class="note-text">
+          Set a discount price to help our bot negotiate and 
+          increase your chances of closing deals faster!
+        </span>
+
+      </div>
+
       <div class="form-group">
         <input type="number" id="quantity" v-model="quantity" placeholder="Quantity (Optional)">
       </div>
+
       <div class="form-group">
         <select id="category" v-model="selectedCategory">
-          <option disabled value="">Select a category</option>
-          <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+            <option disabled value="">Select a category</option>
+            <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+            </option>
         </select>
+        <!-- Error message for selectedCategory -->
+        <div class="error-message error-red" v-if="errorMessage && !selectedCategory">Please select a category.</div>
       </div>
-      <button @click="nextStep">Next</button>
-    </div>
+
+      <!-- Display general error message -->
+      <div class="error-message error-red" v-if="errorMessage">{{ errorMessage }}</div>
+
+      <button type="button" :disabled="validateDiscountPrice" @click="nextStep">Next</button>
+    </form>
+
     <div v-else-if="currentStep === 'step2'">
       <h3>Add Image</h3>
-    <p>Click to add an image</p>
+      <p v-if="!image">Click to add an image</p>
+      <p v-if="image">Image selected</p>
+            <!-- Error message for image -->
+        <div class="error-message error-red" v-if="errorMessage && !image">Please select an image.</div>
       <div class="image-upload">
-
-        <label for="product-image" class="image-upload-label">
-          <input type="file" id="product-image" @change="handleImageChange" class="image-upload-input">
+        <label for="product-image" class="image-upload-label" @click="$refs.fileInput.click">
+          <input type="file" id="image" ref="fileInput" @change="handleImageChange" class="image-upload-input">
           <div class="image-upload-icon"></div> 
         </label>
       </div>
-      
+
       <div class="form-group">
         <label for="product-description">Product Description (Optional)</label>
-        <textarea id="product-description" v-model="productDescription" class="description-input"></textarea>
+        <textarea id="product-description" v-model="description" class="description-input"></textarea>
       </div>
+
       <button @click="uploadProduct" class="upload-button">Upload</button>
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -58,72 +85,119 @@ export default {
   data() {
     return {
       currentStep: 'step1',
-      productName: '',
-      productPrice: '',
-      discountPrice: '',
+      name: '',
+      main_price: '',
+      discount_price: '',
       quantity: '',
       selectedCategory: '',
       categories: [],
-      productImage: null,
-      productDescription: '',
+      image: null,
+      description: '',
+      errorMessage: '', 
     };
   },
+
+  computed: {
+    validateDiscountPrice() {
+      return parseFloat(this.discount_price) >= parseFloat(this.main_price) && this.discount_price !== '';
+    },
+
+     },
+
+
   methods: {
     async nextStep() {
-      // Validate step 1 fields if needed
+      
       this.currentStep = 'step2';
     },
     prevStep() {
       this.currentStep = 'step1';
     },
-async fetchCategories() {
-  try {
-    const response = await axios.get(`${BASE_URL}/admin/categories`);
-    this.categories = response.data;
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-  }
-},
+    async fetchCategories() {
+      const accessToken = localStorage.getItem('accessToken');
+
+      if (accessToken) {
+        const headers = {
+          'Authorization': `Bearer ${accessToken}`,
+        };
+
+        try {
+          const response = await axios.get(`${BASE_URL}/api/categories`, { headers });
+          this.categories = response.data.categories;
+
+        } catch (error) {
+          console.error('Error fetching categories:', error);
+          this.errorMessage = 'Failed to fetch categories. Please try again later.';
+        }
+      } else {
+        console.error('Access token not found in localStorage.');
+        this.errorMessage = 'Access token not found. Please log in again.';
+      }
+    },
     handleImageChange(event) {
-      this.productImage = event.target.files[0];
+      this.image = event.target.files[0];
+      this.$refs.fileInput.click();
     },
     async uploadProduct() {
-      // Validate step 2 fields if needed
-      const formData = new FormData();
-      formData.append('name', this.productName);
-      formData.append('main_price', this.productPrice);
-      formData.append('discount_price', this.discountPrice);
-      formData.append('quantity', this.quantity);
-      formData.append('category_id', this.selectedCategory);
-      formData.append('description', this.productDescription);
-      formData.append('image', this.productImage);
+      const accessToken = localStorage.getItem('accessToken');
 
-      try {
-        const response = await axios.post(`${BASE_URL}/products`, formData);
-        console.log('Product uploaded successfully:', response.data);
-        // Optionally, reset the form fields
-        this.resetForm();
-      } catch (error) {
-        console.error('Error uploading product:', error);
+      if (accessToken) {
+        const headers = {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        };
+
+      
+        if (!this.name || !this.main_price || !this.quantity || !this.selectedCategory || !this.image) {
+          this.errorMessage = 'Please fill in all required fields.';
+          return;
+        }
+
+        this.nextStep();
+
+        const formData = new FormData();
+        formData.append('name', this.name);
+        formData.append('main_price', this.main_price);
+        formData.append('discount_price', this.discount_price);
+        formData.append('quantity', this.quantity);
+        formData.append('category_id', this.selectedCategory);
+        formData.append('description', this.description);
+        formData.append('image', this.image);
+
+        try {
+          const response = await axios.post(`${BASE_URL}/api/products`, formData, { headers });
+          console.log('Product uploaded successfully:', response.data);
+
+          this.resetForm();
+        } catch (error) {
+          console.error('Error uploading product:', error);
+          this.errorMessage = 'Failed to upload product. Please try again later.';
+        }
+      } else {
+        console.error('Access token not found in localStorage.');
+        this.errorMessage = 'Access token not found. Please log in again.';
       }
     },
     resetForm() {
       this.currentStep = 'step1';
-      this.productName = '';
-      this.productPrice = '';
-      this.discountPrice = '';
+      this.name = '';
+      this.main_price = '';
+      this.discount_price = '';
       this.quantity = '';
       this.selectedCategory = '';
-      this.productImage = null;
-      this.productDescription = '';
+      this.image = null;
+      this.description = '';
+      this.errorMessage = ''; 
     },
   },
   created() {
-    // Fetch categories when the component is created
     this.fetchCategories();
   },
 };
 </script>
+
+
+
 
 <style scoped>
 
@@ -149,6 +223,8 @@ textarea {
   border-radius: 5px;
   height: 25px;
   outline: none;
+  font-size: 16px !important; 
+  -webkit-user-select: text !important;
 }
 
 select {
@@ -159,7 +235,7 @@ select {
   border-radius: 5px;
   height: 45px;
   outline: none;
-  color: grey;
+  color: black;
 }
 
 button {
@@ -254,6 +330,10 @@ button {
   border: none; 
   border-radius: 4px; 
   cursor: pointer; 
+}
+
+.error-red {
+  color: red;
 }
 
  }

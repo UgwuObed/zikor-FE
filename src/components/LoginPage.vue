@@ -53,10 +53,9 @@ export default {
     };
   },
   methods: {
-
     routeExists(route) {
-    return this.$router.options.routes.some(r => r.path === route);
-  },
+      return this.$router.options.routes.some(r => r.path === route);
+    },
 
     signUp() {
       this.$router.push('/sign-up');
@@ -66,44 +65,46 @@ export default {
       return this.email && this.password;
     },
 
-   submitLogin() {
+    submitLogin() {
+      this.isLoading = true;
 
-   this.isLoading = true;
+      if (this.validateLogin()) {
+        const formData = {
+          email: this.email,
+          password: this.password,
+        };
 
-  if (this.validateLogin()) {
-    const formData = {
-      email: this.email,
-      password: this.password,
-    };
+        axios.post(`${BASE_URL}/api/login`, formData)
+          .then(response => {
 
-    axios.post(`${BASE_URL}/login`, formData)
-      .then(response => {
-        this.handleLoginSuccess(response.data);
+            this.handleLoginSuccess(response.data);
 
-        this.isLoading = false;
-      })
-      .catch(error => {
-        console.error('Login failed:', error);
+            this.isLoading = false;
+          })
+          .catch(error => {
+            console.error('Login failed:', error);
 
-        if (error.response && error.response.status === 422) {
-          this.errorMessage = 'Invalid email or password. Please try again.';
-        } else {
-          this.errorMessage = 'An error occurred while processing your request. Please try again later.';
-        }
+            if (error.response && error.response.status === 401) {
+              this.errorMessage = 'Invalid email or password. Please try again.';
+            } else {
+              this.errorMessage = 'An error occurred while processing your request. Please try again later.';
+            }
 
-        this.isLoading = false;
-      });
-  } else {
-    this.errorMessage = 'Please fill in all fields.'; 
-  }
-},
-
+            this.isLoading = false;
+          });
+      } else {
+        this.errorMessage = 'Please fill in all fields.'; 
+      }
+    },
 
     handleLoginSuccess(data) {
+
       const redirectUrl = data.redirect;
       if (redirectUrl) {
         if (this.routeExists(redirectUrl)) {
+          localStorage.setItem('accessToken', data.token);
           localStorage.setItem('isAuthenticated', true);
+
           this.$router.push(redirectUrl);
         } else {
           console.error('Redirect URL does not exist on the frontend:', redirectUrl);
@@ -112,9 +113,11 @@ export default {
         console.error('Redirect URL not found in response.');
       }
     },
+
     checkEmail() {
       this.emailTouched = true;
     },
+
     checkPassword() {
       this.passwordTouched = true;
     },
@@ -159,6 +162,8 @@ input[type="password"] {
   background-color: white;
   border-radius: 5px;
   outline: none;
+  font-size: 16px !important; 
+  -webkit-user-select: text !important;
 }
 
   button {
