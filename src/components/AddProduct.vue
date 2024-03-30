@@ -80,6 +80,7 @@
 <script>
 import axios from 'axios';
 import { BASE_URL } from '../config';
+import router from '../router';
 
 export default {
   data() {
@@ -167,6 +168,8 @@ export default {
         try {
           const response = await axios.post(`${BASE_URL}/api/products`, formData, { headers });
           console.log('Product uploaded successfully:', response.data);
+           
+           router.push({ name: 'ProductUploaded' });
 
           this.resetForm();
         } catch (error) {

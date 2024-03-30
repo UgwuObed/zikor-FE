@@ -5,6 +5,7 @@ import HomePage from '@/components/HomePage.vue';
 import LoginPage from '@/components/LoginPage.vue';
 import AccountCreated from '@/components/AccountCreated.vue';
 import AddProduct from '@/components/AddProduct.vue';
+import ProductUploaded from '@/components/ProductUploaded.vue';
 
 
 const routes = [
@@ -42,6 +43,12 @@ const routes = [
       path: '/add-product',
       name: 'AddProduct',
       component: AddProduct
+    },
+
+      {
+      path: '/product-uploaded',
+      name: 'ProductUploaded',
+      component: ProductUploaded
     }
 
 ]
