@@ -93,7 +93,7 @@ export default {
 @media only screen and (max-width: 600px) {
   .home-page {
     display: flex;
-    height: 50vh;
+    height: 45vh;
     width: 90%;
     margin-left: 23px;
     overflow-x: hidden;
@@ -106,7 +106,7 @@ export default {
 
   .hamburger-menu {
     display: block; 
-    margin-right: 385px;
+    margin-right: 315px;
     margin-bottom: 20px;
     margin-top: -30px;
     font-size: 20px;
@@ -138,7 +138,7 @@ export default {
   .rectangle-content h4 {
     font-size: 16px;
     font-weight: normal;
-    margin-bottom: 5px; 
+    margin-bottom: 2px; 
   }
 
   .rectangle-content h3 {
@@ -147,16 +147,16 @@ export default {
   }
 
   .rectangle-content p {
-    font-size: 16px; 
+    font-size: 14px; 
   }
 
   .rectangle-content button {
     position: absolute;
     top: 30px; 
-    right: -100px; 
+    right: -80px; 
     background-color: #5E17EB;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -186,18 +186,17 @@ export default {
   }
 
 h1 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: normal;
     font-family: 'Poppins';
-    margin-right: 250px;
     color: black;
    }
  
   .chart-rectangle {
     position: absolute;
-    top: 69%;
+    top: 65%;
     left: 5%;
-    width: 90%;
+    width: 91.5%;
     height: 280px; 
     background-color: rgba(94, 23, 235, 0.31);
     border-radius: 5px;
