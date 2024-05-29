@@ -87,6 +87,19 @@
       <input type="text" id="city" v-model="city" @blur="checkCity">
       <p v-if="cityTouched && !city" class="error-message">Please enter your city</p>
     </div>
+        <div class="form-group">
+        <label>Is your business registered with CAC?</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" value="true" v-model="is_cac_registered">
+            Yes
+          </label>
+          <label>
+            <input type="radio" value="false" v-model="is_cac_registered">
+            No
+          </label>
+        </div>
+      </div>
         <div v-if="errorMessage" class="error-message">
       {{ errorMessage }}
     </div>
@@ -116,6 +129,7 @@ export default {
       country: '',
       state: '',
       city: '',
+      is_cac_registered: '',
 
       // Step management
       currentStep: 'signup',
@@ -160,6 +174,7 @@ export default {
         country: this.country,
         state: this.state,
         city: this.city,
+        is_cac_registered: this.is_cac_registered === 'true',
       };
     },
     validateBusinessSetup() {
@@ -333,7 +348,28 @@ input[type="password"] {
   align-items: center;
   z-index: 9999;
 }
+.radio-group {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
 
+.radio-group label {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.radio-group input {
+  margin-right: 9px;
+  color: #5E17EB; 
+}
+
+.radio-group input[type="radio"]:checked + label::before {
+  border-color: #5E17EB; 
+  background-color: #5E17EB; 
+}
 .loading-overlay {
   max-width: 100%;
   max-height: 100%;

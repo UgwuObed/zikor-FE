@@ -71,11 +71,13 @@
         <textarea id="product-description" v-model="description" class="description-input"></textarea>
       </div>
 
-      <button @click="uploadProduct" class="upload-button">Upload</button>
+      <button @click="uploadProduct" class="upload-button" :disabled="loading">
+        <span v-if="loading" class="spinner"></span>
+        <span v-else>Upload</span>
+      </button>
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from 'axios';
@@ -94,7 +96,8 @@ export default {
       categories: [],
       image: null,
       description: '',
-      errorMessage: '', 
+      errorMessage: '',
+      loading: false, // New loading property
     };
   },
 
@@ -102,13 +105,10 @@ export default {
     validateDiscountPrice() {
       return parseFloat(this.discount_price) >= parseFloat(this.main_price) && this.discount_price !== '';
     },
-
-     },
-
+  },
 
   methods: {
     async nextStep() {
-      
       this.currentStep = 'step2';
     },
     prevStep() {
@@ -125,7 +125,6 @@ export default {
         try {
           const response = await axios.get(`${BASE_URL}/api/categories`, { headers });
           this.categories = response.data.categories;
-
         } catch (error) {
           console.error('Error fetching categories:', error);
           this.errorMessage = 'Failed to fetch categories. Please try again later.';
@@ -148,13 +147,12 @@ export default {
           'Content-Type': 'multipart/form-data',
         };
 
-      
         if (!this.name || !this.main_price || !this.quantity || !this.selectedCategory || !this.image) {
           this.errorMessage = 'Please fill in all required fields.';
           return;
         }
 
-        this.nextStep();
+        this.loading = true; // Set loading to true before starting the API call
 
         const formData = new FormData();
         formData.append('name', this.name);
@@ -168,13 +166,15 @@ export default {
         try {
           const response = await axios.post(`${BASE_URL}/api/products`, formData, { headers });
           console.log('Product uploaded successfully:', response.data);
-           
-           router.push({ name: 'ProductUploaded' });
+
+          router.push({ name: 'ProductUploaded' });
 
           this.resetForm();
         } catch (error) {
           console.error('Error uploading product:', error);
           this.errorMessage = 'Failed to upload product. Please try again later.';
+        } finally {
+          this.loading = false; // Reset loading to false after the API call is complete
         }
       } else {
         console.error('Access token not found in localStorage.');
@@ -190,7 +190,7 @@ export default {
       this.selectedCategory = '';
       this.image = null;
       this.description = '';
-      this.errorMessage = ''; 
+      this.errorMessage = '';
     },
   },
   created() {
@@ -198,9 +198,6 @@ export default {
   },
 };
 </script>
-
-
-
 
 <style scoped>
 
@@ -338,6 +335,28 @@ button {
 .error-red {
   color: red;
 }
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-left-color: #FAF9FF;
+  animation: spin 1s ease infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -4px; 
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
  }
 </style>
